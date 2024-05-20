@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #calculatorContainer {
+            width: 300px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: calc(100% - 22px);
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculatorContainer">
+        <h1>Calculator</h1>
+        <form id="calculatorForm">
+            <input type="text" id="numA" placeholder="Number A">
+            <input type="text" id="numB" placeholder="Number B">
+            <button type="submit">Submit</button>
+            <div id="errorA" class="error"></div>
+            <div id="errorB" class="error"></div>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script>
+        const form = document.getElementById("calculatorForm");
+        const resultsDiv = document.getElementById("results");
+        const errorA = document.getElementById("errorA");
+        const errorB = document.getElementById("errorB");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const numA = document.getElementById("numA").value;
+            const numB = document.getElementById("numB").value;
+
+            if (!isValidNumber(numA)) {
+                errorA.innerText = "Nhập dữ liệu không đúng định dạng";
+                return;
+            } else {
+                errorA.innerText = "";
+            }
+
+            if (!isValidNumber(numB)) {
+                errorB.innerText = "Nhập dữ liệu không đúng định dạng";
+                return;
+            } else {
+                errorB.innerText = "";
+            }
+
+            const data = { a: parseFloat(numA), b: parseFloat(numB) };
+
+            try {
+                const response = await fetch("/add", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                resultsDiv.innerHTML = `<p>Sum: ${result.result}</p>`;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+
+            // Repeat this process for other operations (subtract, multiply, divide)
+        });
+
+        function isValidNumber(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        }
+    </script>
+</body>
+</html>

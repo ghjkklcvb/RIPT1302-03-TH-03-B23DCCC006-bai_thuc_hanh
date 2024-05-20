@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+</head>
+<body>
+    <header>
+        <h1>Quản lý sinh viên</h1>
+    </header>
+
+    <div class="content">
+        <button class="add-btn" onclick="openForm()">Thêm mới</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>TT</th>
+                    <th>MSV</th>
+                    <th>Tên</th>
+                    <th>Lớp</th>
+                    <th>SĐT</th>
+                    <th>Ngày sinh</th>
+                    <th>Nơi sinh</th>
+                    <th>Thành tích</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <th>01</th>
+                    <th>nguyễn văn A</th>
+                    <th>cn01</th>
+                    <th>0123456789</th>
+                    <th>05/6/2004</th>
+                    <th>Hà Nội</th>
+                    <th>Không</th>
+                    <th>
+                        <div class="tt">sửa</div>
+                        <div class="tt">xóa</div>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>2</th>
+                    <th>02</th>
+                    <th>nguyễn văn B</th>
+                    <th>cn01</th>
+                    <th>0123456799</th>
+                    <th>05/7/2004</th>
+                    <th>Hà Nội</th>
+                    <th>Không</th>
+                    <th>
+                        <div class="tt">sửa</div>
+                        <div class="tt">xóa</div>
+                    </th>
+                </tr>
+                
+
+            </thead>
+            <tbody id="student-list">
+                <!-- Dữ liệu sinh viên sẽ được thêm vào đây bằng JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+            <!-- Các trường nhập thông tin sinh viên sẽ được thêm vào đây bằng JavaScript -->
+            <button type="button" class="btn cancel" onclick="closeForm()">Đóng</button>
+        </form>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+
+
